@@ -196,6 +196,7 @@
         id keys = [[OTMEnvironment sharedEnvironment] fieldKeys];
 
         dest.keys = keys;
+        dest.ecoKeys = [[OTMEnvironment sharedEnvironment] ecoFields];
         dest.imageView.image = self.treeImage.image;
         if (self.mode != Select) {
             // When adding a new tree the detail view is automatically in edit mode
@@ -266,6 +267,10 @@
         }
 
         NSString *fmt = [[OTMEnvironment sharedEnvironment] dbhFormat];
+        if (!fmt) {
+            fmt = @"%f";
+        }
+
 
         if (dbhValue != nil && ![[NSString stringWithFormat:@"%@", dbhValue] isEqualToString:@"<null>"]) {
             tdbh =  [NSString stringWithFormat:fmt, [dbhValue doubleValue]];
